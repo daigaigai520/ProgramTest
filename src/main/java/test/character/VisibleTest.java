@@ -20,7 +20,7 @@ public class VisibleTest {
 
     /**
      * 读取了volatile的flag, start的所有工作区间都会进入主存中
-     * 所以如果false为true,则value一定为100
+     * 所以如果flag为true,则value一定为100
      */
     private Thread end = new Thread(() -> {
         System.out.println(flag + "" + value);
