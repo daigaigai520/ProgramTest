@@ -149,9 +149,10 @@ public class SortTest {
         ArrayList<Integer> copy = Lists.newArrayList(TEST_NUMBER);
     }
 
-
     private static void buildHead(ArrayList<Integer> value) {
+        for (int i = 0; i < value.size() >> 1; i++) {
 
+        }
     }
 
 
