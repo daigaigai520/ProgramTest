@@ -1,7 +1,9 @@
 package test.algorithm.sort;
 
 import com.google.common.collect.Lists;
+import javafx.scene.Parent;
 
+import javax.crypto.Cipher;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -147,11 +149,46 @@ public class SortTest {
     // 堆排序
     private static void heapSort() {
         ArrayList<Integer> copy = Lists.newArrayList(TEST_NUMBER);
+
+        buildHead(copy);
+
+        int count = copy.size();
+        while (count-- > 0) {
+            switchValue(0, count, copy);
+            reblance(copy, count - 1, 0);
+        }
+        System.out.println("heap:" + copy);
     }
 
     private static void buildHead(ArrayList<Integer> value) {
-        for (int i = 0; i < value.size() >> 1; i++) {
+        int size = value.size() - 1;
+        for (int i = size >> 1; i >= 0; i--) {
+            reblance(value, size, i);
+        }
+    }
 
+    // 大根堆
+    private static void reblance(ArrayList<Integer> value, int maxIdx, int parent) {
+        int childIdx = parent << 1;
+        if (childIdx > maxIdx) {
+            return;
+        }
+
+        int parentValue = value.get(parent);
+        Integer childValue = value.get(childIdx);
+
+        // 如果右子树比较小
+        if (childIdx + 1 <= maxIdx) {
+            Integer rightValue = value.get(childIdx + 1);
+            if (rightValue > childValue) {
+                childValue = rightValue;
+                childIdx++;
+            }
+        }
+
+        if (parentValue < childValue) {
+            switchValue(parent, childIdx, value);
+            reblance(value, maxIdx, childIdx);
         }
     }
 
